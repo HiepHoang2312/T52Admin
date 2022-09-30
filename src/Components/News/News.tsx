@@ -3,7 +3,6 @@ import { ColumnsType, TableProps } from "antd/es/table";
 import { AppDispatch, RootState } from "configStore";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { getNewsList } from "Slices/News";
 
 const { TextArea } = Input;
@@ -77,6 +76,7 @@ const News = () => {
               setOpen(true);
               SetEditFormValue(record);
             }}
+            className="mb-2"
           >
             Chi tiết
           </Button>
@@ -182,7 +182,9 @@ const News = () => {
 
   return (
     <div>
-      <h1 className="text-center font-bold text-lg">Danh Sách Tin Tức</h1>
+      <h1 className="text-center font-bold text-4xl text-red-500">
+        Danh Sách Tin Tức
+      </h1>
       <Row>
         <Col lg={{ span: 6 }} md={{ span: 8 }}>
           <Search

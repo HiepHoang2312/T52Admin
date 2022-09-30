@@ -25,6 +25,31 @@ export const getPartnerList = createAsyncThunk(
   },
 );
 
+export const addPartner = createAsyncThunk(
+  "partner/addPartnerList",
+  async (data: any) => {
+    try {
+      console.log(data, "s");
+      const result = await PartnerAPI.addPartner(data);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+);
+
+export const deletePartner = createAsyncThunk(
+  "partner/deletePartner",
+  async (id: string) => {
+    try {
+      const result = await PartnerAPI.deletePartner(id);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+);
+
 const partnerSlice = createSlice({
   name: "partner",
   initialState,
