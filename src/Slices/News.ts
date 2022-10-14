@@ -22,6 +22,15 @@ export const getNewsList = createAsyncThunk("news/getNewList", async () => {
   }
 });
 
+export const addNews = createAsyncThunk("news/addNews", async (data: any) => {
+  try {
+    const result = await NewsAPI.addNews(data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+});
+
 const newsSlice = createSlice({
   name: "partner",
 

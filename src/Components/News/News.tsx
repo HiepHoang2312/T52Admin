@@ -1,9 +1,11 @@
 import { Button, Table, Form, Input, Modal, Row, Col } from "antd";
 import { ColumnsType, TableProps } from "antd/es/table";
 import { AppDispatch, RootState } from "configStore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewsList } from "Slices/News";
+
+import JoditEditor from "jodit-react";
 
 const { TextArea } = Input;
 
@@ -14,12 +16,20 @@ const News = () => {
 
   const [q, setQ] = useState("");
 
+  const [content, SetContent] = useState("");
+
+  const config: any = {
+    readonly: false,
+  };
+
+  const editor = useRef(null);
+
   const [editFormValue, SetEditFormValue] = useState<any>();
 
   const [open, setOpen] = useState(false);
 
   const fSearch = (rows: any[]) => {
-    return rows.filter((row) => row?.name?.toLowerCase().indexOf(q) > -1);
+    return rows?.filter((row) => row?.name?.toLowerCase().indexOf(q) > -1);
   };
 
   useEffect(() => {
@@ -32,12 +42,6 @@ const News = () => {
     {
       title: "Tiêu đề",
       dataIndex: "name",
-    },
-
-    {
-      title: "Nội dung",
-      dataIndex: "descript",
-      ellipsis: true,
     },
 
     {
@@ -75,6 +79,7 @@ const News = () => {
             onClick={() => {
               setOpen(true);
               SetEditFormValue(record);
+              SetContent(value.descript);
             }}
             className="mb-2"
           >
@@ -157,7 +162,12 @@ const News = () => {
             <Input />
           </Form.Item>
           <Form.Item name="descript" label="Nội dung">
-            <TextArea />
+            <JoditEditor
+              ref={editor}
+              value={content}
+              config={config}
+              onBlur={(e) => SetContent(e)}
+            />
           </Form.Item>
           <Form.Item name="personPost" label="Người đăng">
             <Input disabled />
@@ -195,7 +205,7 @@ const News = () => {
         </Col>
       </Row>
       <Table
-        rowKey={(record) => record._id}
+        rowKey={(record) => record.id}
         columns={columns}
         dataSource={fSearch(newsList)}
         onChange={onChange}

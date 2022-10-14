@@ -1,12 +1,17 @@
 import axios from "axios";
+
 const axiosClient = axios.create({
-  baseURL: "https://t52-loan-nodejs.herokuapp.com/t52",
+  // baseURL: "https://t52-loan-nodejs.herokuapp.com/t52",
+  baseURL: "http://localhost:8080",
   headers: {
-    token:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzNhZDQ3ZjA4YWI1MGIzMGNhM2EwMSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjY0MzUyOTg4LCJleHAiOjE2NjY5NDQ5ODh9.3uw9T_ew9cmoMTYbixwMQFS8jPK74Ct8vPQVRBVLv_kds4324g",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    /*  token:
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMzNhZDQ3ZjA4YWI1MGIzMGNhM2EwMSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjY0MzUyOTg4LCJleHAiOjE2NjY5NDQ5ODh9.3uw9T_ew9cmoMTYbixwMQFS8jPK74Ct8vPQVRBVLv_kds4324g", */
   },
 });
-axiosClient.interceptors.request.use((config) => {
+
+/* axiosClient.interceptors.request.use((config) => {
   //config là nội dung của request
   // ta có thể thay đổi nội dung của request trước khi  nó đc gửi lên server
   if (config.headers) {
@@ -17,7 +22,8 @@ axiosClient.interceptors.request.use((config) => {
     }
   }
   return config;
-});
+}); */
+
 axiosClient.interceptors.response.use(
   (reponse) => {
     return reponse.data;
@@ -26,4 +32,5 @@ axiosClient.interceptors.response.use(
     return error.response.data;
   },
 );
+
 export default axiosClient;

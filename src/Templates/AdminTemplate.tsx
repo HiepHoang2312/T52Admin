@@ -1,13 +1,20 @@
+import React, { useState } from "react";
+
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
+  ShopOutlined,
+  AliwangwangOutlined,
+  ApartmentOutlined,
 } from "@ant-design/icons";
 import { Col, Layout, Menu, Row } from "antd";
-import React, { useState } from "react";
 import type { MenuProps } from "antd";
+
 import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+
+import logo from "Assets/image/T52Logo.png";
 
 type MenuItem = Required<MenuProps>["items"][number];
 const { Header, Sider, Content } = Layout;
@@ -27,15 +34,48 @@ function getItem(
   } as MenuItem;
 }
 const items: MenuItem[] = [
-  getItem("Store", "sub1", <UserOutlined />, [
-    getItem("StoreList", "1", <NavLink to="store"></NavLink>),
+  getItem("Store", "sub1", <ShopOutlined />, [
+    getItem(
+      "StoreList",
+      "1",
+      <div>
+        <NavLink to="store"></NavLink>
+      </div>,
+    ),
   ]),
-  getItem("Partner", "sub2", <i className="fa fa-map-marker-alt"></i>, [
-    getItem("PartnerList", "3", <NavLink to="Partner"></NavLink>),
+  getItem("Client", "sub2", <UserOutlined />, [
+    getItem(
+      "ClientList",
+      "2",
+      <div>
+        <NavLink to="client" />
+      </div>,
+    ),
   ]),
-  getItem("News", "sub3", <i className="fa fa-hotel"></i>, [
-    getItem("NewsList", "5", <NavLink to="NewsList"></NavLink>),
-    getItem("AddNews", "6", <NavLink to="AddNews"></NavLink>),
+  getItem("Partner", "sub3", <ApartmentOutlined />, [
+    getItem(
+      "PartnerList",
+      "3",
+      <div>
+        <NavLink to="Partner"></NavLink>
+      </div>,
+    ),
+  ]),
+  getItem("News", "sub4", <AliwangwangOutlined />, [
+    getItem(
+      "NewsList",
+      "5",
+      <div>
+        <NavLink to="NewsList"></NavLink>
+      </div>,
+    ),
+    getItem(
+      "AddNews",
+      "6",
+      <div>
+        <NavLink to="NewsList/addNews"></NavLink>
+      </div>,
+    ),
   ]),
 ];
 
@@ -44,18 +84,15 @@ const AdminTemplate = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-        /* style={{ background: "white" }} */
-      >
-        <div className="logo ease-ease-linear "></div>
+      <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
+        <div className="flex justify-center bg-red-500 rounded-sm shadow-lg  ">
+          <img src={logo} alt="logo" className="w-16 h-16  " />
+        </div>
         <Menu
           mode="inline"
           defaultSelectedKeys={["1"]}
           items={items}
-          theme="dark"
+          theme="light"
         />
       </Sider>
       <Layout className="site-layout">

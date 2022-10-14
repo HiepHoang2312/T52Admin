@@ -1,0 +1,18 @@
+.LoginForm {
+  background-image: url("/src//Assets/image/NAMA1056.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+.LoginForm::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: black;
+  position: absolute;
+  top: 0;
+
+  left: 0;
+  opacity: 0.3;
+}

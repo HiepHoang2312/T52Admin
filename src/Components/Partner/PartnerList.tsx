@@ -69,7 +69,7 @@ const PartnerList = () => {
                 confirmButtonText: "OK",
               }).then((result) => {
                 if (result.isConfirmed) {
-                  onDelete(value._id);
+                  onDelete(value.id);
                 }
               });
             }}
@@ -165,6 +165,7 @@ const PartnerList = () => {
     const data = {
       ...values,
     };
+    console.log(2);
     dispatch(addPartner(data))
       .unwrap()
       .then((result) => {
@@ -209,7 +210,7 @@ const PartnerList = () => {
         Thêm
       </Button>
       <Table
-        rowKey={(record) => record._id}
+        rowKey={(record) => record.id}
         columns={columns}
         dataSource={partners}
         onChange={onChange}
